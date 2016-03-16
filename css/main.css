@@ -1,0 +1,152 @@
+*{
+    box-sizing: border-box;
+}
+.header, .buttons{
+    width:90%;
+    height:50px;
+    margin:0 auto;
+}
+.header{
+    background: #3eaaf5;
+    border:1px solid navy;
+}
+.show_hide{
+    width:35px;
+    height:20px;
+    float:left;
+    cursor:pointer;
+    margin:15px 50px 10px 10px;
+}
+.show_button{
+    background: url("../images/up_arr_1.png") no-repeat;
+    background-size: contain;
+}
+.hide_button{
+    background: url("../images/up_arr_2.png") no-repeat;
+    background-size: contain;
+}
+.delete{
+    width:15px;
+    height:15px;
+    background: url("../images/delete.png") no-repeat;
+    background-size: contain;
+    cursor:pointer;
+    position:relative;
+    left:95%;
+    top:10px;
+}
+.header_descriptions{
+    width:70%;
+    height:auto;
+    background: #fff;
+    border: 1px solid navy;
+    border-bottom: 0;
+    margin:0 auto;
+    font-size: 16px;
+}
+.header_descriptions > .description{
+    text-align: center;
+}
+.header_text{
+    float:left;
+    width:50%;
+    font-family: "Open Sans", sans-serif;
+    font-size:20px;
+    color:#fff;
+    font-weight: bold;
+    line-height: 50px;
+    text-align: center;
+    vertical-align: middle;
+}
+.table_row{
+    width:90%;
+    height:auto;
+    background: #fff;
+    border: 1px solid navy;
+    border-bottom: 0;
+    margin:0 auto;
+    font-size: 16px;
+}
+.table_row:last-child{
+    border-bottom: 1px solid navy;
+}
+.amount, .value{
+    width: 30%;
+    height:50px;
+    float:left;
+    border-right:1px solid navy;
+    padding: 1% 5%;
+    word-break: break-all;
+    overflow:hidden;
+}
+.description{
+    width:70%;
+    height:50px;
+    float:right;
+    padding: 1% 2%;
+    word-break: break-all;
+    overflow:hidden;    
+}
+label{
+    font-weight:bold;
+    padding:10px 0px 10px 0px;
+    width:100%;
+}
+label > input{
+    font-weight:normal;
+}
+#error{
+    color:red;
+    display:none;
+}
+input[type="text"], input[type="number"], input[type="button"]{
+    margin-bottom: 10px;
+    margin-top:10px;
+    margin-right: 10px;
+}
+input[type="button"]{
+    width:100px;
+}
+@media (min-width:768px){
+    .header, .buttons{
+        width:70%;
+    }
+    .show_hide{
+        width:50px;
+        height:30px;
+        float:left;
+        cursor:pointer;
+        margin:10px 50px 10px 10px;
+    }
+    .table_row{
+        width:70%;
+    }
+    .amount, .value{
+        width: 30%;
+        height:37px;
+    }
+    .description{
+        width:70%;
+        height:37px;
+    }
+    .show_button{
+        margin:10px 100px 10px 50px;
+    }
+    .header_text{
+        width:60%;
+    }
+    .amount, .value{
+        width: 20%;
+    }
+    .description{
+        width:80%;
+    }
+    label{
+        width:auto;
+    }
+}
+@media (min-width:992px){
+    .header_text{
+        width:60%;
+    }
+}
