@@ -82,7 +82,7 @@ document.getElementById("filter").addEventListener("keyup", function () {
     }
     if (finded.length === 0) {
         for (i = 0; i < values.length; i++) {
-            values[i].parentNode.style.display = "block";
+            values[i].parentNode.style.display = "none";
         }
     }
     for (var j = 0; j < rowsLength; j++) {
