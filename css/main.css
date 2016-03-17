@@ -32,7 +32,7 @@
     background-size: contain;
     cursor:pointer;
     position:relative;
-    left:95%;
+    left:90%;
     top:10px;
 }
 .header_descriptions{
@@ -146,6 +146,9 @@ input[type="button"]{
     }
     label{
         width:auto;
+    }
+    .delete{
+        left:95%;
     }
 }
 @media (min-width:992px){
