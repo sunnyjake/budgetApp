@@ -107,6 +107,9 @@ input[type="text"], input[type="number"], input[type="button"]{
 input[type="button"]{
     width:100px;
 }
+.error{
+    border-color:red;
+}
 @media (min-width:768px){
     .header, .buttons{
         width:70%;
