@@ -32,7 +32,7 @@
     background-size: contain;
     cursor:pointer;
     position:relative;
-    left:90%;
+    left:95%;
     top:10px;
 }
 .header_descriptions{
@@ -110,6 +110,9 @@ input[type="button"]{
 .error{
     border-color:red;
 }
+#budget_history{
+    width:auto;
+}
 @media (min-width:768px){
     .header, .buttons{
         width:70%;
@@ -146,9 +149,6 @@ input[type="button"]{
     }
     label{
         width:auto;
-    }
-    .delete{
-        left:95%;
     }
 }
 @media (min-width:992px){
