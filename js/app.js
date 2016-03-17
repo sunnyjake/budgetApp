@@ -3,6 +3,14 @@ $(document).ready(function () {
         $(".table_row").slideToggle("slow");
         $(this).toggleClass("hide_button");
     });
+    $("#amount").focus(function(){
+        clearInterval(timer);
+        $(this).removeClass("error");
+    });
+    $("#source").focus(function(){
+        clearInterval(timer);
+        $(this).removeClass("error");
+    });
 });
 
 /*to add new budget item to the table*/
@@ -38,9 +46,19 @@ function insertBudgetItem(amount_value, description_value) {
     row.appendChild(delete_button);
 }
 /*if add button is clicked this fun will invoke insertBudgetItem() and add new item*/
+var timer;
 document.getElementById("add_item").addEventListener("click", function () {
     checkTable();
     if (!document.getElementById("amount").value) {//if amount field is empty
+        timer = setInterval(function(){
+            $("#amount").toggleClass("error");
+        },500);
+        return;
+    }
+    if(!document.getElementById("source").value){
+        timer = setInterval(function(){
+            $("#source").toggleClass("error");
+        },500);
         return;
     }
     var amount = document.getElementById("amount").value;
@@ -61,7 +79,6 @@ document.getElementById("add_item").addEventListener("click", function () {
         });
     }
 });
-
 /*filter all the items which sum is more than user's entered value*/
 document.getElementById("filter").addEventListener("keyup", function () {
     var values = document.getElementsByClassName("value");
