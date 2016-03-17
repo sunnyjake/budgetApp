@@ -3,11 +3,11 @@ $(document).ready(function () {
         $(".table_row").slideToggle("slow");
         $(this).toggleClass("hide_button");
     });
-    $("#amount").focus(function(){
+    $("#amount").focus(function () {
         clearInterval(timer);
         $(this).removeClass("error");
     });
-    $("#source").focus(function(){
+    $("#source").focus(function () {
         clearInterval(timer);
         $(this).removeClass("error");
     });
@@ -41,6 +41,9 @@ function insertBudgetItem(amount_value, description_value) {
     if (description_value === "Sum up(" + new Date().toLocaleDateString() + ")") {
         return;
     }
+    /*if(description_value === "Total"){
+     return;
+     }*/
     var delete_button = document.createElement("div");
     delete_button.className = "delete";
     row.appendChild(delete_button);
@@ -50,15 +53,15 @@ var timer;
 document.getElementById("add_item").addEventListener("click", function () {
     checkTable();
     if (!document.getElementById("amount").value) {//if amount field is empty
-        timer = setInterval(function(){
+        timer = setInterval(function () {
             $("#amount").toggleClass("error");
-        },500);
+        }, 500);
         return;
     }
-    if(!document.getElementById("source").value){
-        timer = setInterval(function(){
+    if (!document.getElementById("source").value) {
+        timer = setInterval(function () {
             $("#source").toggleClass("error");
-        },500);
+        }, 500);
         return;
     }
     var amount = document.getElementById("amount").value;
@@ -140,16 +143,28 @@ document.getElementById("search_field").addEventListener("keyup", function () {
         }
     }
 });
+var data = [];//Object.create(null);
+
 /*Summ all the items*/
 function sumAll() {
     var table = document.getElementById("table");
     var rows = document.getElementsByClassName("table_row");
     var items = document.getElementsByClassName("value");
+    var descriptions = document.getElementsByClassName("description");
     var rowsLength = document.getElementsByClassName("table_row").length;
     var sum = 0;
     for (var i = 0; i < items.length; i++) {
         sum += Number(items[i].innerHTML);
     }
+    for (var k = 0; k < rowsLength; k++) {
+        if (descriptions[k].innerHTML === "Total" || descriptions[k].innerHTML === ("Sum up(" + new Date().toLocaleDateString() + ")")) {
+            continue;
+        }
+        var obj = Object.create(null);
+        obj[items[k].innerHTML] = descriptions[k].innerHTML;
+        data.push(obj);
+    }
+
     for (var j = 0; j < rowsLength; j++) {
         table.removeChild(rows[0]);
     }
@@ -160,6 +175,7 @@ document.getElementById("sum_up").addEventListener("click", function () {
     checkTable();
     sumAll();
     this.disabled = true;
+    document.getElementById("budget_history").disabled = false;
 });
 
 /*Check if the table is visible*/
@@ -172,3 +188,36 @@ function checkTable() {
         }
     }
 }
+
+document.getElementById("budget_history").addEventListener("click", function () {
+    var table = document.getElementById("table");
+    var rows = document.getElementsByClassName("table_row");
+    var rowsLength = document.getElementsByClassName("table_row").length;
+    var items = document.getElementsByClassName("value");
+    var sum = 0;
+    if (rows.length === 1) {
+        return;
+    } else if (rows.length === 2) {
+        for (var j = 0; j < rowsLength; j++) {//clean existing items from the table
+            table.removeChild(rows[0]);
+        }
+        for (var i = 0; i <= data.length; i++) {//add items that were summed up and saved in data-variable
+            for (var key in data[i]) {
+                console.log("printed");
+                insertBudgetItem(key, data[i][key]);
+            }
+        }
+        for (var i = 0; i < items.length; i++) {
+            sum += Number(items[i].innerHTML);
+        }
+        insertBudgetItem(sum, "Sum up(" + new Date().toLocaleDateString() + ")");
+        insertBudgetItem(sum, "Total");
+    } else if (rows.length > 2) {
+        for (var i = 0; i < items.length; i++) {
+            sum += Number(items[i].innerHTML);
+        }
+        for (var j = 0; j < data.length; j++) {//clean existing items from the table
+            table.removeChild(rows[0]);
+        }
+    }
+});
